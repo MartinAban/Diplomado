@@ -52,6 +52,7 @@ if st.session_state.page == "auth":
                 st.session_state.authenticated = True
                 st.session_state.master_password = pw
                 go_to("menu")
+                st.rerun()
             else:
                 st.error("Contraseña incorrecta")
 
