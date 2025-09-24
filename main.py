@@ -6,17 +6,16 @@ from database import (
 )
 from crypto_utils import encrypt, decrypt, hash_password, check_password
 
-# ---------- INIT APP ----------
 st.set_page_config(page_title="Gestor de Contraseñas", layout="centered")
 init_db()
 
-# ---------- SESSION STATE ----------
+# estado de la sesion
 if "page" not in st.session_state:
     st.session_state.page = "auth"
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
-# ---------- FUNCIONES ----------
+# funciones
 def go_to(page):
     st.session_state.page = page
 
@@ -28,12 +27,12 @@ def require_auth(func):
         func()
     return wrapper
 
-# ---------- PANTALLA DE LOGIN ----------
+# Login
 if st.session_state.page == "auth":
     st.title("🔐 Gestor de Contraseñas")
 
     if is_first_run():
-        st.subheader("🆕 Establecer contraseña maestra")
+        st.subheader("Establecer contraseña maestra")
         pw1 = st.text_input("Nueva contraseña maestra", type="password")
         pw2 = st.text_input("Confirmar contraseña", type="password")
         if st.button("Guardar"):
@@ -45,7 +44,7 @@ if st.session_state.page == "auth":
             else:
                 st.error("Las contraseñas no coinciden o están vacías.")
     else:
-        st.subheader("🔑 Ingresar contraseña maestra")
+        st.subheader("Ingresar contraseña maestra")
         pw = st.text_input("Contraseña", type="password")
         if st.button("Entrar"):
             if check_password(pw, get_master_password_hash()):
@@ -56,9 +55,9 @@ if st.session_state.page == "auth":
             else:
                 st.error("Contraseña incorrecta")
 
-# ---------- MENÚ PRINCIPAL ----------
+# menu
 elif st.session_state.page == "menu":
-    st.title("🔐 Gestor de Contraseñas")
+    st.title("Gestor de Contraseñas")
     st.success("Sesión iniciada")
 
     st.button("➕ Agregar contraseña", on_click=lambda: go_to("add"))
@@ -67,7 +66,7 @@ elif st.session_state.page == "menu":
     st.button("🔁 Cambiar contraseña maestra", on_click=lambda: go_to("change"))
     st.button("🚪 Cerrar sesión", on_click=lambda: [st.session_state.clear(), go_to("auth")])
 
-# ---------- AGREGAR CONTRASEÑA ----------
+# agregar contraseñas
 elif st.session_state.page == "add":
     require_auth(lambda: None)()
 
@@ -84,7 +83,7 @@ elif st.session_state.page == "add":
             st.warning("Completa todos los campos.")
     st.button("⬅️ Volver", on_click=lambda: go_to("menu"))
 
-# ---------- VER CONTRASEÑAS ----------
+# ver contraseñas
 elif st.session_state.page == "view":
     require_auth(lambda: None)()
 
@@ -102,7 +101,7 @@ elif st.session_state.page == "view":
         st.info("No hay contraseñas registradas.")
     st.button("⬅️ Volver", on_click=lambda: go_to("menu"))
 
-# ---------- BUSCAR POR SERVICIO ----------
+# buscar por servicio
 elif st.session_state.page == "search":
     require_auth(lambda: None)()
 
@@ -118,7 +117,7 @@ elif st.session_state.page == "search":
             st.warning("No se encontraron resultados.")
     st.button("⬅️ Volver", on_click=lambda: go_to("menu"))
 
-# ---------- CAMBIAR CONTRASEÑA MAESTRA ----------
+# cambiar contraseña maestra
 elif st.session_state.page == "change":
     require_auth(lambda: None)()
 
