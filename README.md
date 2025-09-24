@@ -68,4 +68,4 @@ Están cifradas con Fernet, por lo que en la base de datos aparecen como tokens.
 Solo con la clave Fernet guardada en fernet.key se pueden descifrar.
 
 Si se borra fernet.key, las contraseñas anteriores no podrán recuperarse.
-Para realziar la visualizacion de la base de datos con las contrasñas encriptadas se debe realizar mediante un visualizador como 
+Para realziar la visualizacion de la base de datos con las contraseñas encriptadas se debe realizar mediante un gestor de bases de datos el archivo .BD que se encontrara en el proyecto una vez iniciado el programa.
