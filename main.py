@@ -41,6 +41,7 @@ if st.session_state.page == "auth":
                 st.success("Contraseña maestra guardada.")
                 st.session_state.authenticated = True
                 go_to("menu")
+                st.rerun()
             else:
                 st.error("Las contraseñas no coinciden o están vacías.")
     else:
