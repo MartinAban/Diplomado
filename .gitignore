@@ -1,2 +1,11 @@
 __pycache__/
 fernet.key
+# Ignorar la base de datos
+password_manager.db
+
+# Ignorar la clave de cifrado
+fernet.key
+
+# Archivos de Python
+__pycache__/
+*.pyc
